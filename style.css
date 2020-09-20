@@ -1,0 +1,91 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Ranchers", cursive;
+}
+
+body {
+  background-color: black;
+}
+
+body .screen {
+  background-image: url("img/background.png");
+  background-repeat: no-repeat;
+  background-size: 800px 600px;
+  width: 800px;
+  height: 500px;
+  border-radius: 14px;
+  margin: 40px auto;
+  padding: 10px 0;
+}
+
+/*header*/
+body .screen .header {
+  margin: 0 auto;
+  height: 60%;
+  text-align: center;
+}
+
+/*play button*/
+body .screen .header i.fa-play {
+  background-color: tomato;
+  border: 2px solid black;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+body .screen .header i.fa-play:hover {
+  transition: ease 0.5s;
+  transform: scale(1.1);
+}
+body .screen .header i.fa-play:active {
+  transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
+}
+
+body .screen .header .timer {
+  background-color: white;
+  border: 2px dashed black;
+  border-radius: 8px;
+  width: 100px;
+  padding: 4px;
+  margin: 8px auto;
+  font-size: 20px;
+}
+
+body .screen .header .carrotCounter {
+  background-color: black;
+  color: white;
+  border-radius: 40%;
+  width: fit-content;
+  margin: 0 auto;
+  font-size: 28px;
+  padding: 8px;
+}
+
+/*section field*/
+section.field {
+  height: 40%;
+}
+
+section .alert {
+  background-color: black;
+  margin: 0 auto;
+  width: fit-content;
+  border-radius: 14px;
+  padding: 4px 80px;
+  opacity: 0.5;
+}
+
+section .alert i.fa-redo-alt {
+  margin: 0 auto;
+  width: fit-content;
+  border-radius: 14px;
+  opacity: 1;
+}
+
+/*
+투명하게 만들기 / 위치 조정하기 /
+*/
