@@ -68,22 +68,45 @@ body .screen .header .carrotCounter {
 /*section field*/
 section.field {
   height: 40%;
+  position: relative;
 }
 
 section .alert {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
   margin: 0 auto;
   width: fit-content;
+  text-align: center;
   border-radius: 14px;
-  padding: 4px 80px;
-  opacity: 0.5;
+  padding: 8px 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 section .alert i.fa-redo-alt {
-  margin: 0 auto;
-  width: fit-content;
-  border-radius: 14px;
-  opacity: 1;
+  background-color: tomato;
+  border: 2px solid black;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+section .alert i.fa-redo-alt:hover {
+  transition: ease 0.5s;
+  transform: scale(1.1);
+}
+section .alert i.fa-redo-alt:active {
+  transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
+}
+
+section .alert .message {
+  color: white;
+  margin: 8px;
+  padding: 8px;
+  font-size: 28px;
 }
 
 /*
