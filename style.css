@@ -27,6 +27,7 @@ body .screen .header {
 }
 
 /*play button*/
+body .screen .header i.fa-square,
 body .screen .header i.fa-play {
   background-color: tomato;
   border: 2px solid black;
@@ -36,10 +37,12 @@ body .screen .header i.fa-play {
   padding: 10px;
   cursor: pointer;
 }
+body .screen .header i.fa-square:hover,
 body .screen .header i.fa-play:hover {
   transition: ease 0.5s;
   transform: scale(1.1);
 }
+body .screen .header i.fa-square:active,
 body .screen .header i.fa-play:active {
   transform: translate(0px, 5px);
   box-shadow: 0px 1px 0px 0px;
@@ -67,8 +70,9 @@ body .screen .header .carrotCounter {
 
 /*section field*/
 section.field {
-  height: 40%;
   position: relative;
+  height: 30%;
+  margin: 20px 50px;
 }
 
 section .alert {
@@ -82,10 +86,11 @@ section .alert {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 section .alert i.fa-redo-alt {
-  background-color: tomato;
+  background-color: peru;
   border: 2px solid black;
   border-radius: 8px;
   text-align: center;
@@ -109,6 +114,17 @@ section .alert .message {
   font-size: 28px;
 }
 
-/*
-투명하게 만들기 / 위치 조정하기 /
-*/
+img.bugImg {
+  width: 55px;
+}
+
+img.bugImg,
+img.carrotImg {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+img.bugImg:hover,
+img.carrotImg:hover {
+  transform: scale(1.1) translate(-50%, -50%);
+}
