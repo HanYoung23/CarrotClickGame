@@ -27,6 +27,9 @@ body .screen .header {
 }
 
 /*play button*/
+body .screen .header .headerBtn {
+  height: 44px;
+}
 body .screen .header i.fa-square,
 body .screen .header i.fa-play {
   background-color: tomato;
