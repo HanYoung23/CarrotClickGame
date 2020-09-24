@@ -1,3 +1,4 @@
+"use strict";
 //const header = document.querySelector(".header");
 const headerBtn = document.querySelector(".headerBtn");
 const playBtn = document.querySelector(".fa-play");
@@ -11,9 +12,18 @@ const field = document.querySelector(".field");
 //const message = document.querySelector(".message");
 //const bugImg = document.querySelector(".bugImg");
 //const carrotImg = document.querySelector(".carrotImg");
+const bgSound = new Audio();
+bgSound.src = "sound/bg.mp3";
+const bugPullSound = new Audio();
+bugPullSound.src = "sound/bug_pull.mp3";
+const carrotPullSound = new Audio();
+carrotPullSound.src = "sound/carrot_pull.mp3";
+const gameWinSound = new Audio();
+gameWinSound.src = "sound/game_win.mp3";
 
 playBtn.addEventListener("click", playGame);
 function playGame() {
+  bgSound.play();
   removeImgs();
   changeBtn();
   countDown();
@@ -33,8 +43,7 @@ function changeBtn() {
   playBtn.remove();
 }
 
-// 타이머 기능
-var count;
+let count;
 function countDown() {
   let time = 10;
   count = setInterval(() => {
@@ -48,7 +57,6 @@ function countDown() {
   }, 1000);
 }
 
-// 벌레, 당근 이미지 생성 + 랜덤 배치 + 클릭이벤트
 function creatImgs() {
   const divRow = document.createElement("div");
   divRow.setAttribute("class", "imgList");
@@ -57,43 +65,41 @@ function creatImgs() {
     if (i < 7) {
       divRow.insertAdjacentHTML(
         "afterbegin",
-        `<img class="bugImg" src="img/bug.png" data-id="${i}"/>`
+        `<img class="bugImg" src="img/bug.png" id="bugImg${i}"/>`
       );
       randomCoord("bugImg", i);
-      createImgEvent("bugImg", bugClicked);
+      bugImgEvent();
     }
     divRow.insertAdjacentHTML(
       "afterbegin",
-      `<img class="carrotImg" src="img/carrot.png" data-id="${i}"/>`
+      `<img class="carrotImg" src="img/carrot.png" id="carrotImg${i}"/>`
     );
     randomCoord("carrotImg", i);
-    createImgEvent("carrotImg", carrotClicked);
+    carrotImgEvent();
   }
 }
 
 function randomCoord(imgName, i) {
-  const element = document.querySelector(`.${imgName}[data-id="${i}"]`);
+  const element = document.querySelector(`.${imgName}[id="${imgName}${i}"]`);
   element.style.left = Math.round(Math.random() * field.offsetWidth) + "px";
   element.style.top = Math.round(Math.random() * field.offsetHeight) + "px";
 }
 
-function createImgEvent(imgName, imgClicked) {
-  const img = document.querySelector(`.${imgName}`);
-  let clickCount = 0;
-  img.addEventListener("click", (event) => {
-    imgClicked();
-    img.remove();
-    if (event.target.className === "bugImg") {
-      document.removeEventListener("mousemove", bugClicked);
-    } else if (event.target.className === "carrotImg") {
-      console.log("asdf");
-    }
-  });
-}
-// 버그 클릭 후 -> 나머지 클릭 x
-// 당근 클릭 후 -> 버그 클릭 x
+const bugImgEvent = function () {
+  const bugImg = document.querySelector(".bugImg");
+  bugImg.addEventListener("click", bugClicked);
+};
+
+const carrotImgEvent = function () {
+  const carrotImg = document.querySelector(".carrotImg");
+  carrotImg.addEventListener("click", carrotClicked);
+};
 
 function displayMessage(message) {
+  const resultAlert = document.querySelector(".alert");
+  if (resultAlert) {
+    resultAlert.remove();
+  }
   field.insertAdjacentHTML(
     "afterbegin",
     `<div class="alert">
@@ -124,18 +130,33 @@ function removePauseBtn() {
 }
 
 function bugClicked() {
+  bugPullSound.play();
   displayMessage(`YOU LOST 🤣`);
+  for (let i = 0; i < 10; i++) {
+    const bugImg = document.querySelector(`.bugImg[id="bugImg${i}"]`);
+    const carrotImg = document.querySelector(`.carrotImg[id="carrotImg${i}"]`);
+    if (i < 7) {
+      bugImg.removeEventListener("click", bugClicked);
+    }
+    carrotImg.removeEventListener("click", carrotClicked);
+  }
+  this.remove();
 }
 
 let carrotCount = 10;
 function carrotClicked() {
+  carrotPullSound.play();
   carrotCount--;
   carrotCounter.innerText = `${carrotCount}`;
   if (carrotCount === 0) {
     displayMessage(`YOU WiN 👍`);
+    gameWinSound.play();
     clearInterval(count);
     carrotCount = 10;
   }
+  for (let i = 0; i < 7; i++) {
+    const bugImg = document.querySelector(`.bugImg[id="bugImg${i}"]`);
+    bugImg.removeEventListener("click", bugClicked);
+  }
+  this.remove();
 }
-
-// 소리 기능 추가
