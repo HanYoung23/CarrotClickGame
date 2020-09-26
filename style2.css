@@ -51,6 +51,7 @@ body {
   font-size: 32px;
   margin-top: 8px;
   border-radius: 8px;
+  visibility: hidden;
 }
 
 .game__score {
@@ -63,15 +64,18 @@ body {
   text-align: center;
   color: white;
   border: 4px solid black;
+  visibility: hidden;
 }
 
 .game__field {
+  position: relative;
   width: 100%;
   height: 100%;
   margin-top: 40px;
 }
 
 .pop-up {
+  display: block;
   width: 400px;
   height: 140px;
   padding: 20px;
