@@ -149,7 +149,7 @@ function carrotClicked() {
   carrotCount--;
   carrotCounter.innerText = `${carrotCount}`;
   if (carrotCount === 0) {
-    displayMessage(`YOU WiN 👍`);
+    displayMessage(`YOU WON 👍`);
     gameWinSound.play();
     clearInterval(count);
     carrotCount = 10;
