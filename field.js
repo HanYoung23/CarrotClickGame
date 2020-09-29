@@ -40,6 +40,7 @@ export default class Field {
       this.field.appendChild(item);
     }
   }
+
   onClick = (event) => {
     const target = event.target;
     if (target.matches(".carrot")) {

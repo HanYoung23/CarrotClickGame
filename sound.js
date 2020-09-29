@@ -10,9 +10,9 @@ export function playCarrot() {
 export function playBug() {
   playSound(bugSound);
 }
-export function playAlert() {
-  playSound(alertSound);
-}
+//export function playAlert() {
+//  playSound(alertSound);
+//}
 export function playWin() {
   playSound(winSound);
 }
