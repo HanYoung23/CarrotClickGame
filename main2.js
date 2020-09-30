@@ -19,16 +19,21 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+field.addEventListener("click", onFieldClick);
 gameBtn.addEventListener("click", () => {
   if (started) {
     stopGame();
   } else {
     startGame();
   }
-  started = !started;
+});
+popUpRefresh.addEventListener("click", () => {
+  startGame();
+  hidePopUp();
 });
 
 function startGame() {
+  started = true;
   initGame();
   showStopButton();
   showTimerAndScore();
@@ -36,13 +41,20 @@ function startGame() {
 }
 
 function stopGame() {
+  started = false;
   stopGameTimer();
   hideGameButton();
   showPopUpWithText("REPLAY?");
 }
 
+function finishGame(win) {
+  started = false;
+  hideGameButton();
+  showPopUpWithText(win ? "YOU WON" : "YOU LOST");
+}
+
 function showStopButton() {
-  const icon = gameBtn.querySelector(".fa-play");
+  const icon = gameBtn.querySelector(".fas");
   icon.classList.add("fa-stop");
   icon.classList.remove("fa-play");
 }
@@ -62,6 +74,7 @@ function startGameTimer() {
   timer = setInterval(() => {
     if (remainingTimeSec <= 0) {
       clearInterval(timer);
+      finishGame(CARROT_COUNT === score);
       return;
     }
     updateTimerText(--remainingTimeSec);
@@ -83,11 +96,37 @@ function showPopUpWithText(text) {
   popUp.classList.remove("pop-up--hide");
 }
 
+function hidePopUp() {
+  popUp.classList.add("pop-up--hide");
+}
+
 function initGame() {
-  field.innerHTML = "";
   gameScore.innerText = CARROT_COUNT;
   addItem("carrot", 5, "img/carrot.png");
   addItem("bug", 5, "img/bug.png");
+}
+
+function onFieldClick(event) {
+  if (!started) {
+    return;
+  }
+  const target = event.target;
+  if (target.matches(".carrot")) {
+    target.remove();
+    score++;
+    updateScoreBoard();
+    if (score === CARROT_COUNT) {
+      stopGameTimer();
+      finishGame(true);
+    }
+  } else if (target.matches(".bug")) {
+    stopGameTimer();
+    finishGame(false);
+  }
+}
+
+function updateScoreBoard() {
+  gameScore.innerText = CARROT_COUNT - score;
 }
 
 function addItem(className, count, imgPath) {
