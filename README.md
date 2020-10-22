@@ -1,6 +1,7 @@
 ## CarrotClickGame
 
 ### 스릴있는 당근 뽑기 게임입니다.
+#HTML #CSS #Javascript
 
 #### 기능()
 - creatImgs => 당근,벌레에 랜덤으로 좌표부여 (Math.random()/  Math.round()/ field.offsetWidth/ this.remove())
