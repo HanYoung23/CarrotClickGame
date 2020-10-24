@@ -1,17 +1,10 @@
 "use strict";
-//const header = document.querySelector(".header");
+
 const headerBtn = document.querySelector(".headerBtn");
 const playBtn = document.querySelector(".fa-play");
-//const pauseBtn = document.querySelector(".fa-square");
 const timerAlarm = document.querySelector(".timer");
 const carrotCounter = document.querySelector(".carrotCounter");
 const field = document.querySelector(".field");
-//const resultAlert = document.querySelector(".alert");
-//const replayBtn = document.querySelector(".fa-redo-alt");
-//const imgList = document.querySelector(".imgList");
-//const message = document.querySelector(".message");
-//const bugImg = document.querySelector(".bugImg");
-//const carrotImg = document.querySelector(".carrotImg");
 const bgSound = new Audio();
 bgSound.src = "sound/bg.mp3";
 const bugPullSound = new Audio();
@@ -29,6 +22,7 @@ function playGame() {
   countDown();
   creatImgs();
   carrotCounter.innerText = "10";
+  carrotCount = 10;
 }
 
 function removeImgs() {
@@ -96,6 +90,10 @@ const carrotImgEvent = function () {
 };
 
 function displayMessage(message) {
+  for (let i = 0; i < 7; i++) {
+    const bugImg = document.querySelector(`.bugImg[id="bugImg${i}"]`);
+    bugImg.removeEventListener("click", bugClicked);
+  }
   const resultAlert = document.querySelector(".alert");
   if (resultAlert) {
     resultAlert.remove();
@@ -152,11 +150,6 @@ function carrotClicked() {
     displayMessage(`YOU WON 👍`);
     gameWinSound.play();
     clearInterval(count);
-    carrotCount = 10;
-  }
-  for (let i = 0; i < 7; i++) {
-    const bugImg = document.querySelector(`.bugImg[id="bugImg${i}"]`);
-    bugImg.removeEventListener("click", bugClicked);
   }
   this.remove();
 }
