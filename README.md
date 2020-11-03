@@ -1,6 +1,6 @@
 ## CarrotClickGame
 
-### 스릴있는 당근 뽑기 게임입니다.
+### 스릴있는 당근 뽑기 게임입니다. (프로젝트 기간 - 5일)
 #HTML #CSS #Javascript
 
 게임 플레이 -> https://hanyoung23.github.io/CarrotClickGame/
